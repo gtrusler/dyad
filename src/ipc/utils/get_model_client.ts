@@ -199,6 +199,19 @@ function getRegularModelClient(
         backupModelClients: [],
       };
     }
+    case "claudecode": {
+      const provider = createAnthropic({
+        apiKey,
+        headers: { "anthropic-beta": "claude-code" },
+      });
+      return {
+        modelClient: {
+          model: provider(model.name),
+          builtinProviderId: providerId,
+        },
+        backupModelClients: [],
+      };
+    }
     case "google": {
       const provider = createGoogle({ apiKey });
       return {
