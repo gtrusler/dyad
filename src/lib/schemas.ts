@@ -29,6 +29,7 @@ export const ChatSummariesSchema = z.array(ChatSummarySchema);
 const providers = [
   "openai",
   "anthropic",
+  "claudecode",
   "google",
   "auto",
   "openrouter",

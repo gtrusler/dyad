@@ -95,6 +95,41 @@ export const MODEL_OPTIONS: Record<string, ModelOption[]> = {
       contextWindow: 200_000,
     },
   ],
+  claudecode: [
+    {
+      name: "claude-sonnet-4-20250514",
+      displayName: "Claude 4 Sonnet",
+      description: "Excellent coder",
+      // See comment below for Claude 3.7 Sonnet for why we set this to 16k
+      maxOutputTokens: 16_000,
+      contextWindow: 200_000,
+    },
+    {
+      name: "claude-3-7-sonnet-latest",
+      displayName: "Claude 3.7 Sonnet",
+      description: "Excellent coder",
+      // Technically the max output tokens is 64k, *however* if the user has a lot of input tokens,
+      // then setting a high max output token will cause the request to fail because
+      // the max output tokens is *included* in the context window limit, see:
+      // https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking#max-tokens-and-context-window-size-with-extended-thinking
+      maxOutputTokens: 16_000,
+      contextWindow: 200_000,
+    },
+    {
+      name: "claude-3-5-sonnet-20241022",
+      displayName: "Claude 3.5 Sonnet",
+      description: "Good coder, excellent at following instructions",
+      maxOutputTokens: 8_000,
+      contextWindow: 200_000,
+    },
+    {
+      name: "claude-3-5-haiku-20241022",
+      displayName: "Claude 3.5 Haiku",
+      description: "Lightweight coder",
+      maxOutputTokens: 8_000,
+      contextWindow: 200_000,
+    },
+  ],
   google: [
     // https://ai.google.dev/gemini-api/docs/models#gemini-2.5-pro-preview-03-25
     {
@@ -152,6 +187,7 @@ export const MODEL_OPTIONS: Record<string, ModelOption[]> = {
 export const PROVIDER_TO_ENV_VAR: Record<string, string> = {
   openai: "OPENAI_API_KEY",
   anthropic: "ANTHROPIC_API_KEY",
+  claudecode: "CLAUDE_CODE_API_KEY",
   google: "GEMINI_API_KEY",
   openrouter: "OPENROUTER_API_KEY",
 };
@@ -176,6 +212,12 @@ export const CLOUD_PROVIDERS: Record<
     hasFreeTier: false,
     websiteUrl: "https://console.anthropic.com/settings/keys",
     gatewayPrefix: "anthropic/",
+  },
+  claudecode: {
+    displayName: "Claude Code",
+    hasFreeTier: false,
+    websiteUrl: "https://console.anthropic.com/settings/keys",
+    gatewayPrefix: "claude-code/",
   },
   google: {
     displayName: "Google",
